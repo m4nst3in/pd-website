@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Platform Destroyer</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo.png">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +16,7 @@
                 const token = params.get('access_token');
                 if (token) {
                     localStorage.setItem('discord_token', token);
-                    window.location.href = '../index.html';
+                    window.location.href = 'index.html';
                 } else {
                     document.querySelector('.login-modal').style.display = 'flex';
                 }
@@ -28,7 +29,7 @@
 <body>
     <div class="login-modal">
         <div class="login-content">
-            <img src="../assets/images/logo.png" alt="Platform Destroyer Logo" class="login-logo">
+            <img src="assets/images/logo.png" alt="Platform Destroyer Logo" class="login-logo">
             <h2>Bem-vindo ao site da Platform Destroyer</h2>
             <p>Para acessar o site e os scripts, faça login com Discord</p>
             <button id="discord-login" class="discord-btn">
@@ -37,6 +38,6 @@
         </div>
     </div>
 
-    <script src="../js/auth.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>
