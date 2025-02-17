@@ -1,6 +1,6 @@
 // Configurações do OAuth2
 const CLIENT_ID = '1324207648555532319';
-const REDIRECT_URI = 'https://platformdestroyer.me/auth.html';
+const REDIRECT_URI = 'https://platformdestroyer.me/pages/auth.html';
 const DISCORD_API = 'https://discord.com/api/v10';
 const PLATFORM_DESTROYER_SERVER_ID = '1024794781324419094';
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('discord_token');
     if (!token) {
         // Se não estiver logado, redireciona para a página de login
-        showLoginModal();
+        handleAuthRedirect();
     } else {
         // Verifica se o token ainda é válido e se está no servidor
         validateTokenAndServer(token);
@@ -30,6 +30,23 @@ function showLoginModal() {
 function redirectToDiscordAuth() {
     const scope = 'identify guilds';
     window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${scope}`;
+}
+
+// Função para lidar com o redirecionamento de autenticação
+function handleAuthRedirect() {
+    const hash = window.location.hash;
+    if (hash) {
+        const params = new URLSearchParams(hash.substring(1));
+        const token = params.get('access_token');
+        if (token) {
+            localStorage.setItem('discord_token', token);
+            validateTokenAndServer(token);
+        } else {
+            showLoginModal();
+        }
+    } else {
+        showLoginModal();
+    }
 }
 
 // Validar token e verificar servidor
