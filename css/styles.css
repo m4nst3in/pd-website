@@ -200,6 +200,7 @@ body {
     text-align: center;
     background-color: var(--card-background);
     backdrop-filter: blur(5px);
+    transition: var(--transition);
 }
 
 .script-card:hover {
@@ -510,5 +511,30 @@ kbd {
 
 .page-btn:active {
     transform: translateY(0);
+}
+
+.video-container {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 560px; /* Largura máxima padrão do YouTube */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-container h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.video-container iframe {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .video-container iframe {
+        height: 240px;
+    }
 }
 
