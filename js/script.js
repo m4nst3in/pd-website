@@ -37,6 +37,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+       // Função para observar elementos e adicionar animações
+       const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Para a animação acontecer apenas uma vez
+            }
+        });
+    };
+
+    // Configuração do Intersection Observer
+    const observerOptions = {
+        threshold: 0.2, // 20% do elemento precisa estar visível
+        rootMargin: '0px 0px -50px 0px' // Margem negativa para animar um pouco antes
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Seleciona todos os elementos que devem ser animados
+    const animatedElements = document.querySelectorAll('.script-card, .installation, .usage, .features, .warning, h1, h2, .shortcuts, .video-container');
+
+    // Adiciona as classes de animação e observa os elementos
+    animatedElements.forEach((element, index) => {
+        element.classList.add('fade-in');
+        // Adiciona delays diferentes para elementos em sequência
+        element.classList.add(`fade-delay-${(index % 4) + 1}`);
+        observer.observe(element);
+    });
+
+
     // Theme Toggle (now just for subtle variation)
     const themeToggle = document.querySelector('.theme-toggle');
     const body = document.body;
