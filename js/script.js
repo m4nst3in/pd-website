@@ -37,12 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    
+
        // Função para observar elementos e adicionar animações
        const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Para a animação acontecer apenas uma vez
+                observer.unobserve(entry.target); // Animation happens only once
             }
         });
     };
@@ -56,16 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Seleciona todos os elementos que devem ser animados
-    const animatedElements = document.querySelectorAll('.script-card, .installation, .usage, .features, .warning, h1, h2, .shortcuts, .video-container');
+    const animatedElements = document.querySelectorAll('.script-card, .installation, .usage, .hero, .features, .warning, h1, h2, .shortcuts, .video-container, .about-section, .about-content, .about-text, .features-list');
 
     // Adiciona as classes de animação e observa os elementos
     animatedElements.forEach((element, index) => {
         element.classList.add('fade-in');
-        // Adiciona delays diferentes para elementos em sequência
         element.classList.add(`fade-delay-${(index % 4) + 1}`);
         observer.observe(element);
     });
-
 
     // Theme Toggle (now just for subtle variation)
     const themeToggle = document.querySelector('.theme-toggle');
