@@ -3,16 +3,20 @@ const CLIENT_ID = '1324207648555532319';
 const REDIRECT_URI = 'https://platformdestroyer.me/auth.html';
 const DISCORD_API = 'https://discord.com/api/v10';
 const PLATFORM_DESTROYER_SERVER_ID = '1024794781324419094';
+const SESSION_DURATION = 10 * 60 * 1000; // 10 minutes in milliseconds
 
 // Verificar se já está logado ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('discord_token');
-    if (!token) {
-        // Se não estiver logado, redireciona para a página de login
-        handleAuthRedirect();
-    } else {
-        // Verifica se o token ainda é válido e se está no servidor
+    const loginTimestamp = localStorage.getItem('login_timestamp');
+    const currentTime = new Date().getTime();
+
+    if (token && loginTimestamp && (currentTime - loginTimestamp < SESSION_DURATION)) {
+        // Se o token ainda é válido e a sessão não expirou, valida o token
         validateTokenAndServer(token);
+    } else {
+        // Se não estiver logado ou a sessão expirou, redireciona para a página de login
+        handleAuthRedirect();
     }
 });
 
@@ -40,6 +44,7 @@ function handleAuthRedirect() {
         const token = params.get('access_token');
         if (token) {
             localStorage.setItem('discord_token', token);
+            localStorage.setItem('login_timestamp', new Date().getTime());
             validateTokenAndServer(token);
         } else {
             showLoginModal();
@@ -82,11 +87,13 @@ async function validateTokenAndServer(token) {
 
         // Se chegou aqui, está tudo ok
         localStorage.setItem('discord_token', token);
+        localStorage.setItem('login_timestamp', new Date().getTime());
         window.location.href = '../index.html'; // Redirect to index.html
 
     } catch (error) {
         console.error('Erro na validação:', error);
         localStorage.removeItem('discord_token');
+        localStorage.removeItem('login_timestamp');
         showLoginModal();
     }
 }
@@ -122,5 +129,6 @@ function updateUIForLoggedUser(userData) {
 // Função de logout
 function logout() {
     localStorage.removeItem('discord_token');
+    localStorage.removeItem('login_timestamp');
     location.reload();
 }
