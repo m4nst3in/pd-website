@@ -1,6 +1,6 @@
 // Configurações do OAuth2
 const CLIENT_ID = '1324207648555532319';
-const REDIRECT_URI = 'https://platformdestroyer.me/pages/auth.html';
+const REDIRECT_URI = 'https://platformdestroyer.me/auth.html';
 const DISCORD_API = 'https://discord.com/api/v10';
 const PLATFORM_DESTROYER_SERVER_ID = '1024794781324419094';
 
