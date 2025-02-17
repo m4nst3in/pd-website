@@ -1,0 +1,514 @@
+:root {
+    --primary-color: #8A2BE2;
+    --secondary-color: #4B0082;
+    --background-color: rgba(0, 0, 0, 0.85);
+    --text-color: #ffffff;
+    --card-background: rgba(26, 26, 26, 0.8);
+    --hover-color: #9400D3;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('../assets/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    background-color: transparent;
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    max-width: 1920px; /* Adiciona largura máxima */
+    margin: 0 auto; /* Centraliza a navbar */
+    left: 50%; /* Posiciona no centro */
+    transform: translateX(-50%); /* Ajusta o posicionamento */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    min-width: 200px; /* Garante espaço mínimo para o logo */
+}
+
+.logo-gif {
+    height: 35px;
+    width: 35px;
+    object-fit: contain;
+    display: block;
+    vertical-align: middle;
+}
+
+.logo span {
+    display: inline-block; /* Mudado para inline-block */
+    line-height: 40px; /* Alinha verticalmente com a altura do container */
+    vertical-align: middle;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center; /* Centraliza os links */
+    flex: 1; /* Permite que ocupe o espaço disponível */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.theme-toggle {
+    min-width: 200px; /* Garante espaço mínimo igual ao logo */
+    display: flex;
+    justify-content: flex-end; /* Alinha o toggle à direita */
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-logo {
+    margin-bottom: 0.5rem;
+}
+
+.hero-logo img {
+    max-width: 100px; /* Ajuste este valor conforme o tamanho desejado */
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5)); /* Efeito de brilho roxo */
+}
+
+.cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Scripts Section */
+.scripts-section {
+    padding: 5rem 5%;
+}
+
+.scripts-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.script-icon {
+    margin-bottom: 1rem;
+}
+
+.script-icon img {
+    width: 80px; /* Ajuste este valor conforme necessário */
+    height: 80px; /* Ajuste este valor conforme necessário */
+    object-fit: contain; /* Mantém a proporção da imagem */
+    transition: var(--transition);
+    filter: brightness(1); /* Permite ajustar o brilho da imagem */
+}
+
+.script-card:hover .script-icon img {
+    transform: scale(1.1); /* Efeito de zoom suave ao passar o mouse */
+    filter: brightness(1.2); /* Aumenta o brilho ao passar o mouse */
+}
+
+.scripts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.script-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px; /* Altura mínima para manter consistência */
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--card-background);
+    backdrop-filter: blur(5px);
+}
+
+.script-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.script-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.script-card h3 {
+    margin-bottom: 1rem;
+}
+
+.download-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.download-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* About Section */
+.about-section {
+    padding: 5rem 5%;
+    background-color: var(--card-background);
+    backdrop-filter: blur(5px);
+}
+
+.about-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.features-list {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.features-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.features-list i {
+    color: var(--primary-color);
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 5rem 5%;
+}
+
+.contact-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.submit-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+    color: white;
+    padding: 3rem 5% 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.footer-section a:hover {
+    color: var(--primary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .logo {
+        min-width: auto;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .theme-toggle {
+        min-width: auto;
+    }
+}
+/* Dark Mode */
+body.dark-mode {
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-background: #2d2d2d;
+}
+
+/* Adicione estas classes ao seu arquivo CSS existente */
+
+.script-details {
+    padding: 120px 5% 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.script-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.script-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.script-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.installation, .usage, .features, .warning {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.installation, .warning {
+    grid-column: span 2;
+}
+
+.shortcuts {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.shortcut {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+kbd {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.features ul, .warning ul {
+    list-style: none;
+}
+
+.features li, .warning li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.warning i {
+    color: #ff9800;
+}
+
+.installation ol, .usage ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.installation li, .usage li {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .script-content {
+        grid-template-columns: 1fr;
+    }
+
+    .installation, .warning {
+        grid-column: span 1;
+    }
+
+    .script-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Botão de página (Saiba Mais) */
+.page-btn {
+    margin-top: auto; /* Isso empurra o botão para baixo do card */
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1rem; /* Adiciona espaço na parte inferior */
+}
+
+.page-btn:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+}
+
+.page-btn:active {
+    transform: translateY(0);
+}
+
