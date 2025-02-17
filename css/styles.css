@@ -394,7 +394,7 @@ footer {
 /* Responsive Design */
 @media (max-width: 768px) {
     .navbar {
-        padding: 1rem;
+        display: none; /* Hide the navbar on mobile devices */
     }
 
     .logo {
