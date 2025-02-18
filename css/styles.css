@@ -15,7 +15,10 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-color: #000; /* Fallback color */
+    position: relative;
 }
 
 * {
@@ -31,13 +34,15 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh; /* Changed to 100vh */
     z-index: -1;
     background-image: url('../assets/images/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    -webkit-transform: translateZ(0); /* Fix for mobile Safari */
+    transform: translateZ(0);
 }
 
 body {
@@ -359,6 +364,8 @@ footer {
     box-sizing: border-box;
     color: white;
     padding: 3rem 5% 1rem;
+    position: relative; /* Added */
+    z-index: 1; /* Added */
 }
 
 .footer-content {
@@ -831,4 +838,18 @@ h1, h2, h3, h4, h5, h6 {
 .footer-bottom a:hover {
     color: var(--hover-color);
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    body {
+        min-height: -webkit-fill-available; /* Fix for mobile Safari */
+    }
+
+    html {
+        height: -webkit-fill-available; /* Fix for mobile Safari */
+    }
+
+    .footer-content {
+        padding-bottom: env(safe-area-inset-bottom); /* Fix for notched phones */
+    }
 }
