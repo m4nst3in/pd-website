@@ -127,6 +127,7 @@ body {
 
 /* Hero Section */
 .hero {
+    min-height: 100vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -136,6 +137,9 @@ body {
     padding: 0 1rem;
     position: relative;
     color: white;
+    overflow: hidden; /* Added to prevent scroll overflow */
+    -webkit-transform: translateZ(0); /* Hardware acceleration for mobile */
+    transform: translateZ(0);
 }
 
 .hero h1 {
@@ -840,16 +844,35 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: underline;
 }
 
+/* mobile fixes */
 @media (max-width: 768px) {
-    body {
-        min-height: -webkit-fill-available; /* Fix for mobile Safari */
-    }
-
     html {
-        height: -webkit-fill-available; /* Fix for mobile Safari */
+        height: -webkit-fill-available;
     }
 
-    .footer-content {
-        padding-bottom: env(safe-area-inset-bottom); /* Fix for notched phones */
+    body {
+        min-height: -webkit-fill-available;
+        overflow-x: hidden;
+    }
+
+    .hero {
+        height: -webkit-fill-available;
+        position: fixed; /* Keep hero fixed on mobile */
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    main {
+        position: relative;
+        z-index: 2;
+    }
+
+    #scripts {
+        margin-top: 100vh; /* Add margin to prevent content overlap */
+        position: relative;
+        z-index: 2;
+        background: var(--background-color);
     }
 }
