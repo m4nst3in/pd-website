@@ -926,3 +926,31 @@ h1, h2, h3, h4, h5, h6 {
 .hero-logo:hover img {
     filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
 }
+
+.social-icons {
+    margin-left: auto;
+    padding-right: 2rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-icons a {
+    text-decoration: none;
+}
+
+.social-icons i {
+    font-size: 24px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+}
+
+.discord-icon i:hover {
+    color: var(--hover-color);
+    filter: grayscale(0%);
+}
+
+.github-icon i:hover {
+    color: var(--hover-color);
+    filter: grayscale(0%);
+}
