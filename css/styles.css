@@ -12,8 +12,6 @@
 
 html.has-scroll-smooth {
     overflow: hidden;
-    position: fixed; /* Remova esta linha para mobile */
-    height: 100%;
 }
 
 html.has-scroll-dragging {
@@ -40,15 +38,18 @@ html.has-scroll-dragging {
 }
 
 html, body {
+    scroll-behavior: auto;
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
+    overflow-x: hidden;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-color: #000;
+    position: relative;
     background-color: transparent;
     color: var(--text-color);
     line-height: 1.6;
     position: relative;
-    overflow-x: hidden;
 }
 
 * {
@@ -997,30 +998,51 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
 
-    html.has-scroll-smooth {
-        position: relative; /* Permite scroll no mobile */
+    html, body {
+        overflow-x: hidden;
         overflow-y: auto;
-    }
-    
-    .has-scroll-smooth body {
         position: relative;
-        overflow: auto;
+        height: auto;
+        -webkit-overflow-scrolling: touch;
     }
-    
+
+    body.is-mobile [data-scroll-section] {
+        transform: none !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    .has-scroll-smooth {
+        position: relative !important;
+        overflow: auto !important;
+    }
+
     [data-scroll-container] {
-        position: relative;
-        overflow: visible;
-        min-height: 100vh;
+        transform: none !important;
+        transition: none !important;
+        overflow: visible !important;
     }
-    
-    /* Ajuste o background para mobile */
-    body::before {
-        background-attachment: scroll; /* Importante para iOS */
+
+    .navbar {
         position: fixed;
-        height: 100vh;
-        width: 100vw;
         top: 0;
         left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .hero {
+        padding-top: 80px;
+        min-height: 100vh;
+        height: auto;
+    }
+
+    .script-card {
+        transform: none !important;
+    }
+
+    .script-card:hover {
+        transform: translateY(-5px) !important;
     }
     
     body {
@@ -1031,22 +1053,7 @@ h1, h2, h3, h4, h5, h6 {
     }
    
     .navbar {
-        display: flex; /* Restore navbar visibility */
-        position: fixed;
-        width: 100%;
-        padding: 1rem;
-        background-color: rgba(0, 0, 0, 0.9);
-    }
-    
-    .hero {
-        min-height: 100vh;
-        height: auto;
-        padding-top: 80px; /* Altura da navbar */
-    }
-
-    .scripts-grid {
-        grid-template-columns: 1fr;
-        padding: 0.5rem;
+        display: none; 
     }
 
     .logo {
@@ -1056,31 +1063,6 @@ h1, h2, h3, h4, h5, h6 {
     .nav-links {
         gap: 1rem;
     }
-
-        /* Desative algumas animações em mobile */
-        .script-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        /* Ajuste o footer para mobile */
-        footer {
-            position: relative;
-            width: 100%;
-        }
-    
-        /* Ajuste as seções para mobile */
-        section {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-        }
-        
-        /* Ajuste as animações para mobile */
-        [data-scroll-section] {
-            opacity: 1;
-            transform: none;
-            transition: none;
-        }
 
     .script-content,
     .installation-content,

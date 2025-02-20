@@ -1,23 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Locomotive Scroll com configurações otimizadas
-    const scroll = new LocomotiveScroll({
-        el: document.querySelector('[data-scroll-container]'),
-        smooth: true,
-        smoothMobile: false,
-        lerp: 0.1,
-        multiplier: 1,
-        getSpeed: false,
-        getDirection: false,
-        reloadOnContextChange: true,
-        smartphone: {
-            smooth: false
-        },
-        tablet: {
-            smooth: false
+    // Detector de dispositivo móvel
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Configurações do Locomotive Scroll
+    let scrollInstance;
+    
+    // Função para inicializar o scroll
+    function initializeScroll() {
+        const scrollContainer = document.querySelector('[data-scroll-container]');
+        
+        if (isMobile) {
+            // Configuração para mobile: scroll nativo
+            document.documentElement.classList.remove('has-scroll-smooth');
+            document.documentElement.classList.add('has-scroll-normal');
+            scrollContainer.style.overflow = 'visible';
+            
+            // Se já existe uma instância, destrua
+            if (scrollInstance) {
+                scrollInstance.destroy();
+            }
+            
+            // Permite scroll nativo em mobile
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+            
+            // Ajusta elementos para scroll nativo
+            const sections = document.querySelectorAll('[data-scroll-section]');
+            sections.forEach(section => {
+                section.style.transform = '';
+                section.style.opacity = '1';
+            });
+        } else {
+            // Configuração para desktop
+            scrollInstance = new LocomotiveScroll({
+                el: scrollContainer,
+                smooth: true,
+                lerp: 0.1,
+                multiplier: 1,
+                getSpeed: false,
+                getDirection: false,
+                reloadOnContextChange: true,
+                smartphone: {
+                    smooth: false
+                },
+                tablet: {
+                    smooth: false
+                }
+            });
         }
-    });
+    }
 
-    // Função de debounce para otimizar chamadas frequentes
+    // Função de debounce
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -30,13 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-    // Botão CTA de explorar scripts
+    // Botão CTA
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', function() {
             const scriptsSection = document.querySelector('#scripts');
             if (scriptsSection) {
-                scroll.scrollTo(scriptsSection);
+                if (isMobile) {
+                    scriptsSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    scrollInstance.scrollTo(scriptsSection);
+                }
             }
         });
     }
@@ -62,36 +99,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Observer otimizado para animações
+    // Observer para animações
     const observerCallback = debounce((entries, observer) => {
-        let needsUpdate = false;
-        
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Adiciona a classe visible ao elemento e seus filhos com fade-in
                 entry.target.classList.add('visible');
                 entry.target.querySelectorAll('.fade-in').forEach(el => {
                     el.classList.add('visible');
                 });
-
-                // Não remove a observação da seção about
-                if (!entry.target.classList.contains('script-card') && 
-                    !entry.target.classList.contains('about-section')) {
-                    observer.unobserve(entry.target);
-                    needsUpdate = true;
-                }
-            } else {
-                // Remove visible apenas dos cards de script
-                if (entry.target.classList.contains('script-card')) {
-                    entry.target.classList.remove('visible');
-                    needsUpdate = true;
-                }
             }
         });
-
-        if (needsUpdate) {
-            requestAnimationFrame(() => scroll.update());
-        }
     }, 100);
 
     const observerOptions = {
@@ -101,52 +118,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Inicialização otimizada das animações
-    const initAnimations = () => {
-        // Seleciona todos os elementos que precisam de animação
-        const sections = document.querySelectorAll('section[data-scroll]');
-        const scriptCards = document.querySelectorAll('.script-card');
-        const fadeElements = document.querySelectorAll('.fade-in');
-
-        // Configura as seções principais
-        sections.forEach((section, index) => {
-            if (!section.classList.contains('fade-in')) {
-                section.classList.add('fade-in');
-            }
-            section.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(section);
-        });
-
-        // Configura os cards de script
-        scriptCards.forEach((card, index) => {
-            card.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(card);
-        });
-
-        // Configura elementos com fade-in que não são seções
-        fadeElements.forEach((element, index) => {
-            if (!element.closest('section[data-scroll]')) {
+    // Inicialização das animações
+    function initAnimations() {
+        const elements = document.querySelectorAll('[data-scroll-section], .script-card, .fade-in');
+        
+        elements.forEach((element, index) => {
+            if (isMobile) {
+                // Em mobile, mostra elementos imediatamente
+                element.classList.add('visible');
+                element.style.opacity = '1';
+                element.style.transform = 'none';
+            } else {
+                // Em desktop, aplica animações
+                if (!element.classList.contains('fade-in')) {
+                    element.classList.add('fade-in');
+                }
                 element.style.transitionDelay = `${index * 0.1}s`;
                 observer.observe(element);
             }
         });
-    };
+    }
 
-    initAnimations();
-
-    // Navegação suave otimizada
+    // Navegação
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                scroll.scrollTo(target);
+                if (isMobile) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    scrollInstance.scrollTo(target);
+                }
             }
         });
     });
 
-    // Atualização otimizada da navegação ativa
-    const updateActiveNav = debounce(() => {
+    // Atualização da navegação ativa
+    function updateActiveNav() {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-links a');
         
@@ -159,31 +168,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-    }, 100);
+    }
 
-    scroll.on('scroll', updateActiveNav);
-
-    // Animações otimizadas para os cards
-    const scriptCards = document.querySelectorAll('.script-card');
-    scriptCards.forEach(card => {
-        let isAnimating = false;
-
-        const animateCard = (translateY) => {
-            if (!isAnimating) {
-                isAnimating = true;
-                requestAnimationFrame(() => {
-                    card.style.transform = `translateY(${translateY})`;
-                    isAnimating = false;
-                });
-            }
-        };
-
-        card.addEventListener('mouseenter', () => animateCard('-10px'));
-        card.addEventListener('mouseleave', () => animateCard('0'));
-    });
-
-    // Botão de voltar ao topo otimizado
-    const createScrollTopButton = () => {
+    // Botão de voltar ao topo
+    function createScrollTopButton() {
         const button = document.createElement('button');
         button.className = 'scroll-top';
         button.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -207,46 +195,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.body.appendChild(button);
 
-        const updateScrollTopButton = debounce((args) => {
-            requestAnimationFrame(() => {
-                button.style.opacity = args.scroll.y > 300 ? '1' : '0';
-            });
-        }, 100);
+        // Mostrar/ocultar botão baseado no scroll
+        window.addEventListener('scroll', debounce(() => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            button.style.opacity = scrollY > 300 ? '1' : '0';
+        }, 100));
 
-        scroll.on('scroll', updateScrollTopButton);
-
+        // Ação do botão
         button.addEventListener('click', () => {
-            scroll.scrollTo(0, {
-                duration: 1000,
-                easing: [0.25, 0.1, 0.25, 1]
-            });
+            if (isMobile) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                scrollInstance.scrollTo(0, {
+                    duration: 1000,
+                    easing: [0.25, 0.1, 0.25, 1]
+                });
+            }
         });
-    };
+    }
 
+    // Inicialização
+    if (isMobile) {
+        // Configurações específicas para mobile
+        document.body.classList.add('is-mobile');
+        document.documentElement.classList.remove('has-scroll-smooth');
+        document.documentElement.classList.add('has-scroll-normal');
+    }
+
+    // Inicializar componentes
+    initializeScroll();
+    initAnimations();
     createScrollTopButton();
 
-    // Gerenciamento otimizado de resize
+    // Gerenciamento de resize
     const handleResize = debounce(() => {
-        requestAnimationFrame(() => {
-            scroll.update();
-        });
+        if (!isMobile && scrollInstance) {
+            scrollInstance.update();
+        }
     }, 250);
 
     window.addEventListener('resize', handleResize);
 
-    // Detector de dispositivo móvel para otimizações
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Desativa algumas animações em dispositivos móveis
-    if (isMobile) {
-        document.body.classList.add('is-mobile');
-        const smoothElements = document.querySelectorAll('.scroll-smooth');
-        smoothElements.forEach(el => el.classList.remove('scroll-smooth'));
-    }
-
-    // Limpa event listeners ao sair da página
+    // Cleanup
     window.addEventListener('beforeunload', () => {
-        scroll.destroy();
+        if (scrollInstance) {
+            scrollInstance.destroy();
+        }
         window.removeEventListener('resize', handleResize);
         observer.disconnect();
     });
