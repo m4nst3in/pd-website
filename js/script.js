@@ -123,13 +123,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const elements = document.querySelectorAll('[data-scroll-section], .script-card, .fade-in');
         
         elements.forEach((element, index) => {
+            // Ignora o footer
+            if (element.tagName.toLowerCase() === 'footer') return;
+            
             if (isMobile) {
-                // Em mobile, mostra elementos imediatamente
                 element.classList.add('visible');
                 element.style.opacity = '1';
                 element.style.transform = 'none';
             } else {
-                // Em desktop, aplica animações
                 if (!element.classList.contains('fade-in')) {
                     element.classList.add('fade-in');
                 }
@@ -246,5 +247,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         window.removeEventListener('resize', handleResize);
         observer.disconnect();
+    });
+
+    VanillaTilt.init(document.querySelectorAll(".script-card"), {
+        max: 15,
+        speed: 100,
+        glare: false,
+        "max-glare": 0.5,
+        gyroscope: true
     });
 });
