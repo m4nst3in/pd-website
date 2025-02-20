@@ -12,6 +12,8 @@
 
 html.has-scroll-smooth {
     overflow: hidden;
+    position: fixed; /* Remova esta linha para mobile */
+    height: 100%;
 }
 
 html.has-scroll-dragging {
@@ -38,18 +40,15 @@ html.has-scroll-dragging {
 }
 
 html, body {
-    scroll-behavior: auto;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-x: hidden;
-    min-height: 100vh;
-    background-color: #000;
-    position: relative;
+    width: 100%;
+    height: 100%;
     background-color: transparent;
     color: var(--text-color);
     line-height: 1.6;
     position: relative;
+    overflow-x: hidden;
 }
 
 * {
@@ -997,6 +996,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
+
+    html.has-scroll-smooth {
+        position: relative; /* Permite scroll no mobile */
+        overflow-y: auto;
+    }
+    
+    .has-scroll-smooth body {
+        position: relative;
+        overflow: auto;
+    }
+    
+    [data-scroll-container] {
+        position: relative;
+        overflow: visible;
+        min-height: 100vh;
+    }
+    
+    /* Ajuste o background para mobile */
+    body::before {
+        background-attachment: scroll; /* Importante para iOS */
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+    }
+    
     body {
         min-height: -webkit-fill-available; 
     }
@@ -1005,7 +1031,22 @@ h1, h2, h3, h4, h5, h6 {
     }
    
     .navbar {
-        display: none; 
+        display: flex; /* Restore navbar visibility */
+        position: fixed;
+        width: 100%;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .hero {
+        min-height: 100vh;
+        height: auto;
+        padding-top: 80px; /* Altura da navbar */
+    }
+
+    .scripts-grid {
+        grid-template-columns: 1fr;
+        padding: 0.5rem;
     }
 
     .logo {
@@ -1015,6 +1056,31 @@ h1, h2, h3, h4, h5, h6 {
     .nav-links {
         gap: 1rem;
     }
+
+        /* Desative algumas animações em mobile */
+        .script-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Ajuste o footer para mobile */
+        footer {
+            position: relative;
+            width: 100%;
+        }
+    
+        /* Ajuste as seções para mobile */
+        section {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Ajuste as animações para mobile */
+        [data-scroll-section] {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
 
     .script-content,
     .installation-content,
@@ -1039,4 +1105,15 @@ h1, h2, h3, h4, h5, h6 {
     .footer-content {
         padding-bottom: env(safe-area-inset-bottom);
     }
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    z-index: 1001;
+    transition: width 0.1s ease;
 }
