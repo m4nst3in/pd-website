@@ -10,13 +10,6 @@
     --transition: all 0.3s ease;
 }
 
-.script-card,
-.hero-logo,
-.cta-button,
-.page-btn {
-    will-change: transform;
-}
-
 html.has-scroll-smooth {
     overflow: hidden;
 }
@@ -35,7 +28,8 @@ html.has-scroll-dragging {
 [data-scroll-section] {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);}
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
 
 [data-scroll-section].visible {
     opacity: 1;
@@ -212,7 +206,17 @@ body::before {
 .cta-button, .page-btn {
     position: relative;
     overflow: hidden;
-}
+    background: rgba(138, 43, 226, 0.1);
+    color: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 20px rgba(138, 43, 226, 0.2),
+        inset 0 0 15px rgba(138, 43, 226, 0.1);
+    backdrop-filter: blur(5px);
+}   
 
 .cta-button::before, .page-btn::before {
     content: '';
@@ -225,6 +229,8 @@ body::before {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none; /* Adicione esta linha */
+    z-index: 1; /* Adicione esta linha */
 }
 
 .cta-button:hover::before, .page-btn:hover::before {
@@ -232,14 +238,18 @@ body::before {
     height: 300px;
 }   
 
-@keyframes glowing {
-    0% { box-shadow: 0 0 10px rgba(138, 43, 226, 0.2); }
-    50% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.4); }
-    100% { box-shadow: 0 0 10px rgba(138, 43, 226, 0.2); }
-}
 
 .cta-button:hover, .page-btn:hover {
-    animation: glowing 2s infinite;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 0 25px rgba(138, 43, 226, 0.3),
+        inset 0 0 20px rgba(138, 43, 226, 0.2);
+    background: rgba(148, 0, 211, 0.2);
+}
+
+.cta-button span, .page-btn span {
+    position: relative;
+    z-index: 2;
 }
 
 .cta-button {
