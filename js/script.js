@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Detector de dispositivo móvel
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
+    
     // Configurações do Locomotive Scroll
     let scrollInstance;
     

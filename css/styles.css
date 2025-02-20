@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {    
-    --font-primary: 'Quicksand', sans-serif;
+    --font-primary: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
     --primary-color: #8A2BE2;
     --secondary-color: #4B0082;
     --background-color: rgba(0, 0, 0, 0.85);
@@ -627,7 +628,7 @@ kbd {
     color: white;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    font-family: monospace;
+    font-family: 'Inter';
     font-size: 0.9rem;
 }
 
@@ -657,6 +658,7 @@ kbd {
 
 .page-btn {
     margin-top: auto;
+    font-family: var(--font-primary);
     padding: 0.8rem 1.5rem;
     background: rgba(138, 43, 226, 0.1);
     color: white;
