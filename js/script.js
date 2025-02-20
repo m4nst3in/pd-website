@@ -1,27 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Locomotive Scroll
+    // Locomotive Scroll com configurações otimizadas
     const scroll = new LocomotiveScroll({
         el: document.querySelector('[data-scroll-container]'),
         smooth: true,
-        smoothMobile: true,
-        lerp: 0.075,
-        multiplier: 0.9,
-        getSpeed: true,
-        getDirection: true,
+        smoothMobile: false,
+        lerp: 0.1,
+        multiplier: 1,
+        getSpeed: false,
+        getDirection: false,
         reloadOnContextChange: true,
         smartphone: {
-            smooth: true,
-            multiplier: 2.5, // Aumentar velocidade pro mobile não ficar lento
-            lerp: 0.15 
+            smooth: false
         },
         tablet: {
-            smooth: true,
-            multiplier: 2, // mesma coisa pro tablet
-            lerp: 0.15 
+            smooth: false
         }
     });
 
-    // Botão de explorar script
+    // Função de debounce para otimizar chamadas frequentes
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Botão CTA de explorar scripts
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', function() {
@@ -32,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Botão pros download
+    // Gerenciamento dos botões de download
     const downloadButtons = document.querySelectorAll('.download-btn');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
@@ -44,32 +53,46 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.opacity = '0.7';
 
             setTimeout(() => {
+                window.open(scriptUrl, '_blank');
                 setTimeout(() => {
                     this.textContent = originalText;
                     this.style.opacity = '1';
-                    this.style.backgroundColor = '';
-                    window.open(scriptUrl, '_blank');
-                }, 1000);
-            }, 1500);
+                }, 500);
+            }, 800);
         });
     });
 
-    // Observer das animacoes
-    const observerCallback = (entries, observer) => {
+    // Observer otimizado para animações
+    const observerCallback = debounce((entries, observer) => {
+        let needsUpdate = false;
+        
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Adiciona a classe visible ao elemento e seus filhos com fade-in
                 entry.target.classList.add('visible');
-                if (!entry.target.classList.contains('script-card')) {
+                entry.target.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('visible');
+                });
+
+                // Não remove a observação da seção about
+                if (!entry.target.classList.contains('script-card') && 
+                    !entry.target.classList.contains('about-section')) {
                     observer.unobserve(entry.target);
+                    needsUpdate = true;
                 }
-                scroll.update(); // Update locomotive scroll after animations
             } else {
+                // Remove visible apenas dos cards de script
                 if (entry.target.classList.contains('script-card')) {
                     entry.target.classList.remove('visible');
+                    needsUpdate = true;
                 }
             }
         });
-    };
+
+        if (needsUpdate) {
+            requestAnimationFrame(() => scroll.update());
+        }
+    }, 100);
 
     const observerOptions = {
         threshold: 0.15,
@@ -78,21 +101,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Animacoes
-    const animatedElements = document.querySelectorAll(
-        '.script-card, .installation, .usage, .hero, .features, ' +
-        '.warning, h1, h2, .shortcuts, .video-container, ' +
-        '.about-section, .about-content, .about-text, .features-list'
-    );
+    // Inicialização otimizada das animações
+    const initAnimations = () => {
+        // Seleciona todos os elementos que precisam de animação
+        const sections = document.querySelectorAll('section[data-scroll]');
+        const scriptCards = document.querySelectorAll('.script-card');
+        const fadeElements = document.querySelectorAll('.fade-in');
 
-    // Iniciar animacoes com delays
-    animatedElements.forEach((element, index) => {
-        element.classList.add('fade-in');
-        element.classList.add(`fade-delay-${(index % 4) + 1}`);
-        observer.observe(element);
-    });
+        // Configura as seções principais
+        sections.forEach((section, index) => {
+            if (!section.classList.contains('fade-in')) {
+                section.classList.add('fade-in');
+            }
+            section.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(section);
+        });
 
-    // Scroll smooth
+        // Configura os cards de script
+        scriptCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Configura elementos com fade-in que não são seções
+        fadeElements.forEach((element, index) => {
+            if (!element.closest('section[data-scroll]')) {
+                element.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(element);
+            }
+        });
+    };
+
+    initAnimations();
+
+    // Navegação suave otimizada
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -103,8 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Link de navigation
-    scroll.on('scroll', (args) => {
+    // Atualização otimizada da navegação ativa
+    const updateActiveNav = debounce(() => {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-links a');
         
@@ -113,29 +155,35 @@ document.addEventListener('DOMContentLoaded', function() {
             if (rect.top <= 100 && rect.bottom >= 100) {
                 const current = section.getAttribute('id');
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').slice(1) === current) {
-                        link.classList.add('active');
-                    }
+                    link.classList.toggle('active', link.getAttribute('href').slice(1) === current);
                 });
             }
         });
-    });
+    }, 100);
 
-    // Animacao nos cards dos script
+    scroll.on('scroll', updateActiveNav);
+
+    // Animações otimizadas para os cards
     const scriptCards = document.querySelectorAll('.script-card');
     scriptCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
+        let isAnimating = false;
 
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
+        const animateCard = (translateY) => {
+            if (!isAnimating) {
+                isAnimating = true;
+                requestAnimationFrame(() => {
+                    card.style.transform = `translateY(${translateY})`;
+                    isAnimating = false;
+                });
+            }
+        };
+
+        card.addEventListener('mouseenter', () => animateCard('-10px'));
+        card.addEventListener('mouseleave', () => animateCard('0'));
     });
 
-    // Botao pra dar scroll pra cima
-    const addScrollToTop = () => {
+    // Botão de voltar ao topo otimizado
+    const createScrollTopButton = () => {
         const button = document.createElement('button');
         button.className = 'scroll-top';
         button.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -153,29 +201,53 @@ document.addEventListener('DOMContentLoaded', function() {
             opacity: 0;
             transition: opacity 0.3s, transform 0.3s;
             z-index: 1000;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         `;
 
         document.body.appendChild(button);
 
-        scroll.on('scroll', (args) => {
-            if (args.scroll.y > 300) {
-                button.style.opacity = '1';
-            } else {
-                button.style.opacity = '0';
-            }
-        });
+        const updateScrollTopButton = debounce((args) => {
+            requestAnimationFrame(() => {
+                button.style.opacity = args.scroll.y > 300 ? '1' : '0';
+            });
+        }, 100);
+
+        scroll.on('scroll', updateScrollTopButton);
 
         button.addEventListener('click', () => {
-            scroll.scrollTo(0);
+            scroll.scrollTo(0, {
+                duration: 1000,
+                easing: [0.25, 0.1, 0.25, 1]
+            });
         });
     };
 
-    addScrollToTop();
+    createScrollTopButton();
 
-    // Window resize
-    window.addEventListener('resize', () => {
-        setTimeout(() => {
+    // Gerenciamento otimizado de resize
+    const handleResize = debounce(() => {
+        requestAnimationFrame(() => {
             scroll.update();
-        }, 100);
+        });
+    }, 250);
+
+    window.addEventListener('resize', handleResize);
+
+    // Detector de dispositivo móvel para otimizações
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Desativa algumas animações em dispositivos móveis
+    if (isMobile) {
+        document.body.classList.add('is-mobile');
+        const smoothElements = document.querySelectorAll('.scroll-smooth');
+        smoothElements.forEach(el => el.classList.remove('scroll-smooth'));
+    }
+
+    // Limpa event listeners ao sair da página
+    window.addEventListener('beforeunload', () => {
+        scroll.destroy();
+        window.removeEventListener('resize', handleResize);
+        observer.disconnect();
     });
 });

@@ -10,6 +10,13 @@
     --transition: all 0.3s ease;
 }
 
+.script-card,
+.hero-logo,
+.cta-button,
+.page-btn {
+    will-change: transform;
+}
+
 html.has-scroll-smooth {
     overflow: hidden;
 }
@@ -25,11 +32,14 @@ html.has-scroll-dragging {
     overflow: hidden;
 }
 
-[data-scroll-container] {
-    min-height: 100vh;
-}
-
 [data-scroll-section] {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);}
+
+[data-scroll-section].visible {
+    opacity: 1;
+    transform: translateY(0);
     position: relative;
 }
 
@@ -134,8 +144,22 @@ body::before {
     color: var(--primary-color);
 }
 
+
 .nav-links a.active {
     color: var(--primary-color);
+}
+
+.nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .theme-toggle {
@@ -160,11 +184,19 @@ body::before {
     color: var(--primary-color);
     font-size: 3rem;
     margin-bottom: 1rem;
+    animation: slideIn 1s ease forwards;
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    animation: slideIn 1s ease 0.3s forwards;
+    opacity: 0;
+}
+
+.hero .cta-button {
+    animation: slideIn 1s ease 0.6s forwards;
+    opacity: 0;
 }
 
 .hero-logo {
@@ -175,6 +207,39 @@ body::before {
     max-width: 100px;
     height: auto;
     filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+}
+
+.cta-button, .page-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before, .page-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.cta-button:hover::before, .page-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}   
+
+@keyframes glowing {
+    0% { box-shadow: 0 0 10px rgba(138, 43, 226, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.4); }
+    100% { box-shadow: 0 0 10px rgba(138, 43, 226, 0.2); }
+}
+
+.cta-button:hover, .page-btn:hover {
+    animation: glowing 2s infinite;
 }
 
 .cta-button {
@@ -257,11 +322,24 @@ body::before {
     backdrop-filter: blur(5px);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .script-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 20px 30px rgba(138, 43, 226, 0.2);
+    transform: 
+        translateY(-15px) 
+        rotateX(15deg) 
+        rotateY(20deg)
+        rotateZ(-5deg);
+    box-shadow: 
+        -20px 20px 30px rgba(138, 43, 226, 0.2), 
+        5px -5px 30px rgba(138, 43, 226, 0.1); 
+}
+
+.script-card:hover .script-icon img {
+    transform: rotate3d(0, -1, 0.2, 20deg) scale(1.1);
 }
 
 .script-card::after {
@@ -354,11 +432,31 @@ body::before {
     display: flex;
     align-items: center;
     gap: 1rem;
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideInFeature 0.5s ease forwards;
 }
+
+@keyframes slideInFeature {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.features-list li:nth-child(1) { animation-delay: 0.1s; }
+.features-list li:nth-child(2) { animation-delay: 0.2s; }
+.features-list li:nth-child(3) { animation-delay: 0.3s; }
+.features-list li:nth-child(4) { animation-delay: 0.4s; }
 
 .features-list i {
     color: var(--primary-color);
+    transition: transform 0.3s ease;
 }
+
+.features-list li:hover i {
+    transform: scale(1.2) rotate(10deg);
+}   
 
 .contact-section {
     padding: 5rem 5%;
@@ -448,6 +546,24 @@ footer {
 
 .social-links a {
     font-size: 1.5rem;
+    position: relative;
+}
+
+.social-links a::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -5px;
+    right: -5px;
+    bottom: -1px;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover::before {
+    transform: scale(1);
 }
 
 .footer-bottom {
@@ -642,11 +758,6 @@ kbd {
     transform: translateY(0);
 }
 
-[data-scroll-section].visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .fade-delay-1 { transition-delay: 0.2s; }
 .fade-delay-2 { transition-delay: 0.4s; }
 .fade-delay-3 { transition-delay: 0.6s; }
@@ -772,12 +883,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-banner {
+    transition: transform 0.3s ease;
     width: 100%;
     max-width: 300px;
     height: auto;
     object-fit: contain;
     margin-bottom: 1rem;
     border-radius: 15px;
+}
+
+.footer-banner:hover {
+    transform: scale(1.05);
 }
 
 .footer-section:first-child {
@@ -796,23 +912,32 @@ h1, h2, h3, h4, h5, h6 {
 .footer-bottom a:hover {
     color: var(--hover-color);
     text-decoration: underline;
+    
 }
 
 @keyframes float {
-    0% {
-        transform: translateX(0) translateY(0);
+    0%, 100% {
+        transform: translateY(0) rotate(0);
     }
     25% {
-        transform: translateX(-10px) translateY(-5px);
+        transform: translateY(-10px) rotate(5deg);
     }
     50% {
-        transform: translateX(0) translateY(-10px);
+        transform: translateY(0) rotate(0);
     }
     75% {
-        transform: translateX(10px) translateY(-5px);
+        transform: translateY(-10px) rotate(-5deg);
     }
-    100% {
-        transform: translateX(0) translateY(0);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -842,6 +967,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .social-icons i {
     font-size: 24px;
+    transform: scale(1);
+    transition: transform 0.3s ease;
     color: #ffffff;
     transition: all 0.3s ease;
     filter: grayscale(100%);
@@ -849,11 +976,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .discord-icon i:hover {
     color: var(--hover-color);
+    transform: scale(1.2) rotate(5deg);
     filter: grayscale(0%);
 }
 
 .github-icon i:hover {
     color: var(--hover-color);
+    transform: scale(1.2) rotate(5deg);
     filter: grayscale(0%);
 }
 
