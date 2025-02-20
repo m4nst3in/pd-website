@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Locomotive Scroll
+    // Locomotive Scroll
     const scroll = new LocomotiveScroll({
         el: document.querySelector('[data-scroll-container]'),
         smooth: true,
@@ -11,17 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
         reloadOnContextChange: true,
         smartphone: {
             smooth: true,
-            multiplier: 2.5, // Increased speed for mobile
-            lerp: 0.15 // Faster response on mobile
+            multiplier: 2.5, // Aumentar velocidade pro mobile não ficar lento
+            lerp: 0.15 
         },
         tablet: {
             smooth: true,
-            multiplier: 2, // Increased speed for tablets
-            lerp: 0.15 // Faster response on tablets
+            multiplier: 2, // mesma coisa pro tablet
+            lerp: 0.15 
         }
     });
 
-    // Explorar Scripts Button
+    // Botão de explorar script
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', function() {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Download Buttons
+    // Botão pros download
     const downloadButtons = document.querySelectorAll('.download-btn');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Animation Observer
+    // Observer das animacoes
     const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -78,21 +78,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Animated Elements
+    // Animacoes
     const animatedElements = document.querySelectorAll(
         '.script-card, .installation, .usage, .hero, .features, ' +
         '.warning, h1, h2, .shortcuts, .video-container, ' +
         '.about-section, .about-content, .about-text, .features-list'
     );
 
-    // Initialize animations with staggered delays
+    // Iniciar animacoes com delays
     animatedElements.forEach((element, index) => {
         element.classList.add('fade-in');
         element.classList.add(`fade-delay-${(index % 4) + 1}`);
         observer.observe(element);
     });
 
-    // Smooth anchor scrolling
+    // Scroll smooth
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Active Navigation Link
+    // Link de navigation
     scroll.on('scroll', (args) => {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-links a');
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Script Cards Animation
+    // Animacao nos cards dos script
     const scriptCards = document.querySelectorAll('.script-card');
     scriptCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll to top button
+    // Botao pra dar scroll pra cima
     const addScrollToTop = () => {
         const button = document.createElement('button');
         button.className = 'scroll-top';
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     addScrollToTop();
 
-    // Handle window resize
+    // Window resize
     window.addEventListener('resize', () => {
         setTimeout(() => {
             scroll.update();
