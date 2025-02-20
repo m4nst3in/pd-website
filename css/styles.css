@@ -853,7 +853,10 @@ h1, h2, h3, h4, h5, h6 {
     .nav-links {
         gap: 1rem;
     }
-    .script-content {
+
+    .script-content,
+    .installation-content,
+    .usage-section {
         grid-template-columns: 1fr;
     }
 
@@ -864,22 +867,11 @@ h1, h2, h3, h4, h5, h6 {
     .script-header {
         flex-direction: column;
         text-align: center;
+        grid-template-columns: 1fr;
     }
 
     .video-container iframe {
         height: 240px;
-    }
-
-    .installation-content {
-        grid-template-columns: 1fr;
-    }
-
-    .usage-section {
-        grid-template-columns: 1fr;
-    }
-
-    .script-header {
-        grid-template-columns: 1fr;
     }
 
     .footer-content {
