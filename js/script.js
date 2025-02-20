@@ -37,64 +37,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    
-
-       // Função para observar elementos e adicionar animações
-       const observerCallback = (entries, observer) => {
+    // Função para observar elementos e adicionar animações
+    const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Animation happens only once
+                // Only unobserve if it's not a repeating animation
+                if (!entry.target.classList.contains('script-card')) {
+                    observer.unobserve(entry.target);
+                }
+            } else {
+                // Remove visible class when element is not in view (for cards only)
+                if (entry.target.classList.contains('script-card')) {
+                    entry.target.classList.remove('visible');
+                }
             }
         });
     };
 
-    // Configuração do Intersection Observer
     const observerOptions = {
-        threshold: 0.2, // 20% do elemento precisa estar visível
-        rootMargin: '0px 0px -50px 0px' // Margem negativa para animar um pouco antes
+        threshold: 0.15,
+        rootMargin: '0px 0px -10% 0px'
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Seleciona todos os elementos que devem ser animados
-    const animatedElements = document.querySelectorAll('.script-card, .installation, .usage, .hero, .features, .warning, h1, h2, .shortcuts, .video-container, .about-section, .about-content, .about-text, .features-list');
+const animatedElements = document.querySelectorAll(
+    '.script-card, .installation, .usage, .hero, .features, ' +
+    '.warning, h1, h2, .shortcuts, .video-container, ' +
+    '.about-section, .about-content, .about-text, .features-list'
+);
 
-    // Adiciona as classes de animação e observa os elementos
-    animatedElements.forEach((element, index) => {
-        element.classList.add('fade-in');
-        element.classList.add(`fade-delay-${(index % 4) + 1}`);
-        observer.observe(element);
-    });
+// Initialize animations with staggered delays
+animatedElements.forEach((element, index) => {
+    element.classList.add('fade-in');
+    element.classList.add(`fade-delay-${(index % 4) + 1}`);
+    observer.observe(element);
+});
 
-    // Theme Toggle (now just for subtle variation)
-    const themeToggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-    
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const icon = themeToggle.querySelector('i');
-        if (body.classList.contains('dark-mode')) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+// Smooth Scrolling Enhancement
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
     });
-
-    // Smooth Scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+});
 
     // Active Navigation Link
     const sections = document.querySelectorAll('section');

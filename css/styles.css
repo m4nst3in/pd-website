@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
-
-
-:root {
-    --font-primary: 'Open Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+:root {    
+    --font-primary: 'Quicksand', sans-serif;
     --primary-color: #8A2BE2;
     --secondary-color: #4B0082;
     --background-color: rgba(0, 0, 0, 0.85);
     --text-color: #ffffff;
-    --card-background: rgba(26, 26, 26, 0.8);
+    --card-background: rgba(26, 26, 26, 0.8);   
     --hover-color: #9400D3;
     --transition: all 0.3s ease;
 }
@@ -26,7 +24,6 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body::before {
@@ -225,14 +222,28 @@ body {
         0 0 20px rgba(138, 43, 226, 0.2),
         inset 0 0 15px rgba(138, 43, 226, 0.1);
     backdrop-filter: blur(5px);
-    transition: var(--transition);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .script-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 0 25px rgba(138, 43, 226, 0.3),
-        inset 0 0 20px rgba(138, 43, 226, 0.2);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 30px rgba(138, 43, 226, 0.2);
+}
+
+.script-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.script-card:hover::after {
+    opacity: 0.3;
 }
 
 .script-icon {
@@ -606,8 +617,8 @@ kbd {
 /* Animações de Scroll */
 .fade-in {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fade-in.visible {
@@ -851,4 +862,35 @@ h1, h2, h3, h4, h5, h6 {
     .footer-content {
         padding-bottom: env(safe-area-inset-bottom); /* Fix for notched phones */
     }
+}
+
+@keyframes float {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    25% {
+        transform: translateX(-10px) translateY(-5px);
+    }
+    50% {
+        transform: translateX(0) translateY(-10px);
+    }
+    75% {
+        transform: translateX(10px) translateY(-5px);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+.hero-logo {
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-logo img {
+    filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.hero-logo:hover img {
+    filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.5));
 }
