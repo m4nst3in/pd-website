@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
         getDirection: true,
         reloadOnContextChange: true,
         smartphone: {
-            smooth: true
+            smooth: true,
+            multiplier: 2.5, // Increased speed for mobile
+            lerp: 0.15 // Faster response on mobile
         },
         tablet: {
-            smooth: true
+            smooth: true,
+            multiplier: 2, // Increased speed for tablets
+            lerp: 0.15 // Faster response on tablets
         }
     });
 
