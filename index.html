@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="has-scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,12 @@
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
 </head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6812082704170691" crossorigin="anonymous"></script>
 <body>
+    <div data-scroll-container>
     <nav class="navbar">
         <div class="logo">
             <img src="assets/gifs/logo.gif" class="logo-gif" alt="Logo">
@@ -23,8 +26,8 @@
         </div>
     </nav>
 
-    <main>
-        <section id="home" class="hero">
+    <main data-scroll-section>
+        <section id="home" class="hero" data-scroll>
             <div class="hero-logo">
                 <img src="assets/images/logo.png" alt="Platform Destroyer Logo">
             </div>
@@ -33,7 +36,7 @@
             <button class="cta-button">Explorar Scripts</button>
         </section>
 
-        <section id="scripts" class="scripts-section">
+        <section id="scripts" class="scripts-section" data-scroll>
             <h2>Scripts Disponíveis</h2>
             <div class="scripts-grid">
                 <div class="script-card">
@@ -79,7 +82,7 @@
             </div>
         </section>
 
-        <section id="about" class="about-section fade-in">
+        <section id="about" class="about-section fade-in" data-scroll>
             <h2>Sobre o Projeto</h2>
             <div class="about-content">
                 <div class="about-text fade-in fade-delay-1">
@@ -95,10 +98,12 @@
         </section>
     </main>
 
-    <footer>
+    <footer data-scroll-section>
         <div class="footer-content">
             <div class="footer-section">
-                <img src="assets/images/banner_pd.png" alt="Platform Destroyer Banner" class="footer-banner">
+                <a href="https://discord.gg/platformdestroyer" target="_blank">
+                    <img src="assets/images/banner_pd.png" alt="Platform Destroyer Banner" class="footer-banner">
+                </a>
             </div>
             <div class="footer-section">
                 <h4>Links Rápidos</h4>
@@ -118,6 +123,7 @@
             <p> Desenvolvido por <a href="https://github.com/m4nst3in" target="_blank">m4nst3in</a></p>
         </div>
     </footer>
+</div>
 
     <script src="js/script.js"></script>
 </body>

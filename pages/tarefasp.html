@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="has-scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,109 +7,116 @@
     <link rel="icon" type="image/png" href="../assets/images/logo.png">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
 </head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6812082704170691"
      crossorigin="anonymous"></script>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="../assets/gifs/logo.gif" class="logo-gif" alt="Logo">
-            <span>Platform Destroyer</span>
-        </div>
-        <div class="nav-links">
-            <a href="../index.html">Início</a>
-            <a href="../index.html#scripts">Scripts</a>
-            <a href="../index.html#about">Sobre</a>
-        </div>
-    </nav>
+    <div data-scroll-container>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../assets/gifs/logo.gif" class="logo-gif" alt="Logo">
+                <span>Platform Destroyer</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Início</a>
+                <a href="../index.html#scripts">Scripts</a>
+                <a href="../index.html#about">Sobre</a>
+            </div>
+        </nav>
 
-    <main>
-        <section class="script-details">
-            <div class="script-header">
-                <div class="header-left">
-                    <img src="../assets/images/TarefaSP.webp" alt="TarefaSP" class="script-logo">
-                    <h1>TarefaSP (Sala do Futuro)</h1>
+        <main data-scroll-section>
+            <section class="script-details" data-scroll>
+                <div class="script-header">
+                    <div class="header-left">
+                        <img src="../assets/images/TarefaSP.webp" alt="TarefaSP" class="script-logo">
+                        <h1>TarefaSP (Sala do Futuro)</h1>
+                    </div>
+                    <div class="header-banner">
+                        <img src="../assets/images/banner.png" alt="Banner" class="banner-image">
+                    </div>
                 </div>
-                <div class="header-banner">
-                    <img src="../assets/images/banner.png" alt="Banner" class="banner-image">
-                </div>
-            </div>
 
-            <div class="installation">
-                <div class="installation-content">
-                    <div class="installation-text">
-                        <h2>Como instalar</h2>
-                        <ol>
-                            <li>Utilize um navegador compátivel, como o Chrome e o Firefox</li>
-                            <li>Obtenha o script através de nosso servidor de Discord ou o link abaixo(Aperte o botão Download abaixo)</li>
-                            <li>Entre no site fornecido pelo servidor do Discord ou o link.</li>
-                            <li>Após isso, siga as instruções da seção Como usar.</li>
-                            <li>Caso não consiga, confira o vídeo ao lado:</li>
-                        </ol>
-                        <button class="download-btn" data-github="doritus.mmrcoss.tech">Download</button>
+                <div class="installation">
+                    <div class="installation-content">
+                        <div class="installation-text">
+                            <h2>Como instalar</h2>
+                            <ol>
+                                <li>Utilize um navegador compátivel, como o Chrome e o Firefox</li>
+                                <li>Obtenha o script através de nosso servidor de Discord ou o link abaixo(Aperte o botão Download abaixo)</li>
+                                <li>Entre no site fornecido pelo servidor do Discord ou o link.</li>
+                                <li>Após isso, siga as instruções da seção Como usar.</li>
+                                <li>Caso não consiga, confira o vídeo ao lado:</li>
+                            </ol>
+                            <button class="download-btn" data-github="doritus.mmrcoss.tech">Download</button>
+                        </div>
+                        <div class="video-container">
+                            <h3>Tutorial em Vídeo</h3>
+                            <iframe 
+                                width="100%" 
+                                height="315" 
+                                src="https://www.youtube.com/embed/mm0BA9XzRTs?"
+                                title="Tutorial de Instalação" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
-                    <div class="video-container">
-                        <h3>Tutorial em Vídeo</h3>
-                        <iframe 
-                            width="100%" 
-                            height="315" 
-                            src="https://www.youtube.com/embed/mm0BA9XzRTs?"
-                            title="Tutorial de Instalação" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
+                    <div class="usage-section">
+                        <div class="usage">
+                            <h2>Como usar</h2>
+                            <ol>
+                                <li>Coloque o seu RA + Dígito + UF (incluindo os três zeros no começo).</li>
+                                <li>Insira sua senha de acesso à Sala do Futuro.</li>
+                                <li>Escolha o tempo em que cada lição deve ser feita.</li>
+                                <li>Escolha qual tipo de lição você quer realizar.</li>
+                                <li>Fique no site por, no mínimo, 3 minutos.</li>
+                            </ol>
+                        </div>
+                    
+                        <div class="features">
+                            <h2>Funcionalidades</h2>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Resolução automática de exercícios</li>
+                                <li><i class="fas fa-check"></i> Tempo personalizável.</li>
+                                <li><i class="fas fa-check"></i> Compatível com todas as matérias</li>
+                                <li><i class="fas fa-check"></i> Seguro, anti-banimentos</li>
+                                <li><i class="fas fa-check"></i> 100% gratuito e atualizado</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="usage-section">
-                    <div class="usage">
-                        <h2>Como usar</h2>
-                        <ol>
-                            <li>Coloque o seu RA + Dígito + UF (incluindo os três zeros no começo).</li>
-                            <li>Insira sua senha de acesso à Sala do Futuro.</li>
-                            <li>Escolha o tempo em que cada lição deve ser feita.</li>
-                            <li>Escolha qual tipo de lição você quer realizar.</li>
-                            <li>Fique no site por, no mínimo, 3 minutos.</li>
-                        </ol>
-                    </div>
-                
-                    <div class="features">
-                        <h2>Funcionalidades</h2>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Resolução automática de exercícios</li>
-                            <li><i class="fas fa-check"></i> Tempo personalizável.</li>
-                            <li><i class="fas fa-check"></i> Compatível com todas as matérias</li>
-                            <li><i class="fas fa-check"></i> Seguro, anti-banimentos</li>
-                            <li><i class="fas fa-check"></i> 100% gratuito e atualizado</li>
-                        </ul>
-                    </div>
-                </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <img src="../assets/images/banner_pd.png" alt="Platform Destroyer Banner" class="footer-banner">
-            </div>
-            <div class="footer-section">
-                <h4>Links Rápidos</h4>
-                <a href="#../home">Início</a>
-                <a href="#../scripts">Scripts</a>
-                <a href="#../about">Sobre</a>
-            </div>
-            <div class="footer-section">
-                <h4>Redes Sociais</h4>
-                <div class="social-links">
-                    <a href="https://discord.gg/platformdestroyer"><i class="fab fa-discord"></i></a>
-                    <a href="https://github.com/m4nst3in"><i class="fab fa-github"></i></a>
+        <footer data-scroll-section>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="https://discord.gg/platformdestroyer" target="_blank">
+                        <img src="../assets/images/banner_pd.png" alt="Platform Destroyer Banner" class="footer-banner">
+                    </a>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <a href="../index.html">Início</a>
+                    <a href="../index.html#scripts">Scripts</a>
+                    <a href="../index.html#about">Sobre</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="https://discord.gg/platformdestroyer"><i class="fab fa-discord"></i></a>
+                        <a href="https://github.com/m4nst3in"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p> Desenvolvido por <a href="https://github.com/m4nst3in" target="_blank">m4nst3in</a></p>
-        </div>
-    </footer>
+            <div class="footer-bottom">
+                <p> Desenvolvido por <a href="https://github.com/m4nst3in" target="_blank">m4nst3in</a></p>
+            </div>
+        </footer>
+    </div>
 
     <script src="../js/script.js"></script>
 </body>

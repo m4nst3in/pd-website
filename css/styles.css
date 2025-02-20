@@ -10,6 +10,33 @@
     --transition: all 0.3s ease;
 }
 
+html.has-scroll-smooth {
+    overflow: hidden;
+}
+
+html.has-scroll-dragging {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.has-scroll-smooth body {
+    overflow: hidden;
+}
+
+[data-scroll-container] {
+    min-height: 100vh;
+}
+
+[data-scroll-section] {
+    position: relative;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -618,10 +645,15 @@ kbd {
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-scroll-section].visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -883,14 +915,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-logo {
-    animation: float 6s ease-in-out infinite;
+    animation: float 16s ease-in-out infinite;
 }
 
 .hero-logo img {
-    filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.3));
-    transition: filter 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.3));
+    transition: filter 1.5s ease;
 }
 
 .hero-logo:hover img {
-    filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.5));
+    filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
 }
