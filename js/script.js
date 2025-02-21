@@ -1,38 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Detector de dispositivo móvel
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     
-    // Configurações do Locomotive Scroll
     let scrollInstance;
     
-    // Função para inicializar o scroll
     function initializeScroll() {
         const scrollContainer = document.querySelector('[data-scroll-container]');
         
         if (isMobile) {
-            // Configuração para mobile: scroll nativo
             document.documentElement.classList.remove('has-scroll-smooth');
             document.documentElement.classList.add('has-scroll-normal');
             scrollContainer.style.overflow = 'visible';
             
-            // Se já existe uma instância, destrua
             if (scrollInstance) {
                 scrollInstance.destroy();
             }
             
-            // Permite scroll nativo em mobile
             document.documentElement.style.overflow = '';
             document.body.style.overflow = '';
             
-            // Ajusta elementos para scroll nativo
             const sections = document.querySelectorAll('[data-scroll-section]');
             sections.forEach(section => {
                 section.style.transform = '';
                 section.style.opacity = '1';
             });
         } else {
-            // Configuração para desktop
             scrollInstance = new LocomotiveScroll({
                 el: scrollContainer,
                 smooth: true,
@@ -51,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função de debounce
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -64,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-    // Botão CTA
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', function() {
@@ -79,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Gerenciamento dos botões de download
     const downloadButtons = document.querySelectorAll('.download-btn');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
@@ -100,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Observer para animações
     const observerCallback = debounce((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -119,12 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Inicialização das animações
     function initAnimations() {
         const elements = document.querySelectorAll('[data-scroll-section], .script-card, .fade-in');
         
         elements.forEach((element, index) => {
-            // Ignora o footer
             if (element.tagName.toLowerCase() === 'footer') return;
             
             if (isMobile) {
@@ -141,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Navegação
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -156,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Atualização da navegação ativa
     function updateActiveNav() {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-links a');
@@ -172,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Botão de voltar ao topo
     function createScrollTopButton() {
         const button = document.createElement('button');
         button.className = 'scroll-top';
@@ -197,13 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.body.appendChild(button);
 
-        // Mostrar/ocultar botão baseado no scroll
         window.addEventListener('scroll', debounce(() => {
             const scrollY = window.scrollY || window.pageYOffset;
             button.style.opacity = scrollY > 300 ? '1' : '0';
         }, 100));
 
-        // Ação do botão
         button.addEventListener('click', () => {
             if (isMobile) {
                 window.scrollTo({
@@ -219,20 +200,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Inicialização
     if (isMobile) {
-        // Configurações específicas para mobile
         document.body.classList.add('is-mobile');
         document.documentElement.classList.remove('has-scroll-smooth');
         document.documentElement.classList.add('has-scroll-normal');
     }
 
-    // Inicializar componentes
     initializeScroll();
     initAnimations();
     createScrollTopButton();
 
-    // Gerenciamento de resize
     const handleResize = debounce(() => {
         if (!isMobile && scrollInstance) {
             scrollInstance.update();
@@ -241,7 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup
     window.addEventListener('beforeunload', () => {
         if (scrollInstance) {
             scrollInstance.destroy();

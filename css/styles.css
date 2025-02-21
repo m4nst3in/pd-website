@@ -100,6 +100,7 @@ body::before {
     gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;
+    font-family: var(--font-primary);
     color: var(--primary-color);
     min-width: 200px;
 }
@@ -290,6 +291,7 @@ body::before {
 
 .scripts-section h2 {
     text-align: center;
+    font-size: xx-large;
     margin-bottom: 3rem;
 }
 
