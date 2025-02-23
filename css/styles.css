@@ -1214,9 +1214,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cta-button {
-    padding: 0.8rem 1.8rem; /* Ajustado para um tamanho mais compacto */
+    padding: 0.8rem 1.8rem;
     font-size: 1.1rem;
-    min-width: 180px; /* Reduzido de 200px para 180px */
+    min-width: 180px;
 }
 
 .cta-button.secondary {
@@ -1240,7 +1240,6 @@ h1, h2, h3, h4, h5, h6 {
     cursor: grabbing;
 }
 
-/* Para garantir que o canvas fique responsivo */
 #leaf-container canvas {
     width: 100% !important;
     height: 100% !important;
@@ -1251,6 +1250,11 @@ h1, h2, h3, h4, h5, h6 {
         width: 150px;
         height: 150px;
     }
+}
+
+.btn-common-size {
+    min-width: 200px;
+    text-align: center;
 }
 
 

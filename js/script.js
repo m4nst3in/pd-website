@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    
+
+
     let scrollInstance;
-    
+
     function initializeScroll() {
         const scrollContainer = document.querySelector('[data-scroll-container]');
-        
+
         if (isMobile) {
             document.documentElement.classList.remove('has-scroll-smooth');
             document.documentElement.classList.add('has-scroll-normal');
             scrollContainer.style.overflow = 'visible';
-            
+
             if (scrollInstance) {
                 scrollInstance.destroy();
             }
-            
+
             document.documentElement.style.overflow = '';
             document.body.style.overflow = '';
-            
+
             const sections = document.querySelectorAll('[data-scroll-section]');
             sections.forEach(section => {
                 section.style.transform = '';
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const scriptUrl = this.getAttribute('data-github');
             const originalText = this.textContent;
-            
+
             this.textContent = 'Carregando...';
             this.style.opacity = '0.7';
 
@@ -109,10 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initAnimations() {
         const elements = document.querySelectorAll('[data-scroll-section], .script-card, .fade-in');
-        
+
         elements.forEach((element, index) => {
             if (element.tagName.toLowerCase() === 'footer') return;
-            
+
             if (isMobile) {
                 element.classList.add('visible');
                 element.style.opacity = '1';
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateActiveNav() {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-links a');
-        
+
         sections.forEach(section => {
             const rect = section.getBoundingClientRect();
             if (rect.top <= 100 && rect.bottom >= 100) {
@@ -225,6 +225,13 @@ document.addEventListener('DOMContentLoaded', function() {
         window.removeEventListener('resize', handleResize);
         observer.disconnect();
     });
+
+    const discordButton = document.getElementById('discord-button');
+    if (discordButton) {
+        discordButton.addEventListener('click', function() {
+            window.location.href = 'https://discord.gg/platformdestroyer';
+        });
+    }
 
     VanillaTilt.init(document.querySelectorAll(".script-card, .hero-stats"), {
         max: 15,
