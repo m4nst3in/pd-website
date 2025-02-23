@@ -69,6 +69,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function animateUserCount() {
+        const userCountElement = document.getElementById('user-count');
+        const targetCount = 265700;
+        const duration = 2200; // duração da animação em milissegundos
+        const startTime = performance.now();
+
+        function updateCount(currentTime) {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const currentCount = Math.floor(progress * targetCount);
+            userCountElement.textContent = `${(currentCount / 1000).toFixed(1)}k`;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCount);
+            }
+        }
+
+        requestAnimationFrame(updateCount);
+    }
+
+    animateUserCount();
+
     const downloadButtons = document.querySelectorAll('.download-btn');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
