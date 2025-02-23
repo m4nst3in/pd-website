@@ -249,8 +249,8 @@ body::before {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
-    pointer-events: none; /* Adicione esta linha */
-    z-index: 1; /* Adicione esta linha */
+    pointer-events: none;
+    z-index: 1;
 }
 
 .cta-button:hover::before, .page-btn:hover::before {
@@ -746,8 +746,8 @@ kbd {
     width: 100%;
     max-width: 100%;
     height: auto;
-    min-width: 300px; /* Set a minimum width */
-    min-height: 200px; /* Set a minimum height */
+    min-width: 300px;
+    min-height: 200px;
     aspect-ratio: 16 / 9;
     border: none;
     border-radius: 10px;
@@ -1064,7 +1064,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .cta-button {
-        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        min-width: 150px;
     }
 
     .script-card:hover {
@@ -1129,10 +1131,10 @@ h1, h2, h3, h4, h5, h6 {
 .gradient-loading {
     position: relative;
     background: linear-gradient(60deg, 
-        rgba(138, 43, 226, 0.3),  /* #8A2BE2 com transparência */
-        rgba(75, 0, 130, 0.3),    /* #4B0082 com transparência */
-        rgba(148, 0, 211, 0.3),   /* #9400D3 com transparência */
-        rgba(138, 43, 226, 0.3)   /* #8A2BE2 com transparência */
+        rgba(138, 43, 226, 0.3),
+        rgba(75, 0, 130, 0.3),
+        rgba(148, 0, 211, 0.3),
+        rgba(138, 43, 226, 0.3)
     );
     background-size: 300% 300%;
     animation: gradient-shift 4s ease infinite;
