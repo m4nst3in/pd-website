@@ -12,8 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5252485325875983"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-</head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script></head>
 <body>
     <div data-scroll-container>
         <nav class="navbar">
@@ -38,7 +37,7 @@
     <main data-scroll-section>
         <section id="home" class="hero" data-scroll>
             <div class="hero-logo">
-                <img src="assets/images/logo.png" alt="Platform Destroyer Logo">
+                <div id="leaf-container"></div>
             </div>
             <h1>Platform Destroyer</h1>
             <p class="hero-tagline">O melhor hub de scripts para plataformas educacionais!</p>
@@ -169,7 +168,15 @@
             <p> Desenvolvido por <img src="assets/images/prussia.png" alt="Prussia Flag" style="height: 20px; vertical-align: middle; margin-right: 5px;"><a href="https://github.com/m4nst3in" target="_blank">m4nst3in</a></p>        </div>
     </footer>
 </div>
-
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.skypack.dev/three@0.136.0",
+                "three/examples/jsm/controls/OrbitControls": "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js"
+            }
+        }
+    </script>
+    <script type="module" src="js/leaf3d.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -216,8 +216,8 @@ body::before {
 
 .hero-logo {
     margin-bottom: 0.5rem;
-    animation: float 16s ease-in-out infinite;
 }
+
 
 .hero-logo img {
     max-width: 100px;
@@ -1030,11 +1030,6 @@ h1, h2, h3, h4, h5, h6 {
     .hero {
         gap: 1rem;
     }
-
-    .hero-logo img {
-        max-width: 80px; /* Logo um pouco menor em mobile */
-    }
-
     .hero h1 {
         font-size: 2.2rem;
         padding: 0 1rem;
@@ -1232,6 +1227,30 @@ h1, h2, h3, h4, h5, h6 {
 
 .cta-button.secondary:hover {
     background: rgba(148, 0, 211, 0.2);
+}
+
+#leaf-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    cursor: grab;
+}
+
+#leaf-container:active {
+    cursor: grabbing;
+}
+
+/* Para garantir que o canvas fique responsivo */
+#leaf-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media (max-width: 768px) {
+    #leaf-container {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 
