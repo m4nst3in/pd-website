@@ -392,7 +392,7 @@ body::before {
     align-self: center;
     min-width: 200px;
     text-align: center;
-    box-shadow: 
+    box-shadow:
         0 0 20px rgba(138, 43, 226, 0.2),
         inset 0 0 15px rgba(138, 43, 226, 0.1);
     backdrop-filter: blur(5px);
@@ -401,7 +401,7 @@ body::before {
 .download-btn:hover {
     background: rgba(148, 0, 211, 0.2);
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
         0 0 25px rgba(138, 43, 226, 0.3),
         inset 0 0 20px rgba(138, 43, 226, 0.2);
 }
@@ -715,6 +715,9 @@ kbd {
 }
 
 .video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 0;
     width: 100%;
     max-width: 560px;
@@ -723,15 +726,15 @@ kbd {
     background: rgba(138, 43, 226, 0.1);
     border: 2px solid var(--primary-color);
     border-radius: 15px;
-    box-shadow: 
-        0 0 20px rgba(138, 43, 226, 0.2),
-        inset 0 0 15px rgba(138, 43, 226, 0.1);
+    box-shadow:
+            0 0 20px rgba(138, 43, 226, 0.2),
+            inset 0 0 15px rgba(138, 43, 226, 0.1);
     backdrop-filter: blur(5px);
 }
 
 .video-container h3 {
     margin-top: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     color: var(--text-color);
     text-align: center;
     font-size: 1.4rem;
@@ -740,11 +743,16 @@ kbd {
 }
 
 .video-container iframe {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-width: 300px; /* Set a minimum width */
+    min-height: 200px; /* Set a minimum height */
+    aspect-ratio: 16 / 9;
+    border: none;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    border: 1px solid rgba(138, 43, 226, 0.3);
-    transition: transform 0.3s ease;
+    object-fit: cover;
 }
 
 .video-container iframe:hover {
