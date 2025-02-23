@@ -171,23 +171,39 @@ body::before {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 1rem;
+    padding: 2rem 1rem;
     position: relative;
     color: white;
+    gap: 1.5rem; /* Espaçamento reduzido entre elementos */
 }
 
 .hero h1 {
     color: var(--primary-color);
     font-size: 3rem;
-    margin-bottom: 1rem;
+    margin: 0; /* Remove margem padrão */
+    padding: 0; /* Remove padding padrão */
+    line-height: 1.2; /* Ajusta o line-height */
     animation: slideIn 1s ease forwards;
 }
 
 .hero p {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin: 0.5rem 0 1rem; /* Ajusta as margens */
     animation: slideIn 1s ease 0.3s forwards;
     opacity: 0;
+    max-width: 600px; /* Limita a largura do texto para melhor leitura */
+}
+
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin: 1.5rem 0; /* Reduzido de 2rem para 1.5rem */
+    animation: slideIn 1s ease 0.4s forwards;
+    opacity: 0;
+    padding: 1rem;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 15px;
+    border: 1px solid var(--primary-color);
 }
 
 .hero .cta-button {
@@ -196,13 +212,15 @@ body::before {
 }
 
 .hero-logo {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; /* Reduzido para ficar mais próximo do título */
+    animation: float 16s ease-in-out infinite;
 }
 
 .hero-logo img {
     max-width: 100px;
     height: auto;
     filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5));
+    transition: filter 1.5s ease;
 }
 
 .cta-button, .page-btn {
@@ -1008,13 +1026,39 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .hero {
-        padding-top: 80px;
-        min-height: 100vh;
-        height: auto;
+        padding-top: 6rem; /* Adiciona espaço para a navbar em mobile */
+        gap: 1rem; /* Reduz ainda mais o gap em mobile */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem; /* Reduz o tamanho do título em mobile */
+    }
+    .hero p {
+        font-size: 1.2rem;
+        margin: 0.5rem 0 1rem; /* Ajusta as margens */
+        animation: slideIn 1s ease 0.3s forwards;
+        opacity: 0;
+        max-width: 600px; /* Limita a largura do texto para melhor leitura */
     }
 
     .script-card {
         transform: none !important;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
     }
 
     .script-card:hover {
@@ -1100,4 +1144,90 @@ h1, h2, h3, h4, h5, h6 {
         background-position: 0% 50%;
     }
 }
+
+.hero-tagline {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    animation: slideIn 1s ease 0.3s forwards;
+    opacity: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem; /* Reduzido de 0.5rem para 0.3rem */
+}
+
+.stat-item i {
+    font-size: 1.8rem; /* Reduzido de 2rem para 1.8rem */
+    color: var(--primary-color);
+}
+
+.stat-number {
+    font-size: 1.6rem; /* Reduzido de 1.8rem para 1.6rem */
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-features {
+    display: flex;
+    gap: 1rem; /* Reduzido de 2rem para 1rem */
+    margin: 1rem 0; /* Reduzido de 2rem para 1rem */
+    animation: slideIn 1s ease 0.5s forwards;
+    opacity: 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(138, 43, 226, 0.1);
+    padding: 0.6rem 1.2rem; /* Reduzido de 0.75rem 1.5rem */
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-2px);
+    background: rgba(138, 43, 226, 0.2);
+}
+
+.feature-item i {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem; /* Reduzido de 2rem para 1rem */
+    animation: slideIn 1s ease 0.6s forwards;
+    opacity: 0;
+}
+
+.cta-button {
+    padding: 0.8rem 1.8rem; /* Ajustado para um tamanho mais compacto */
+    font-size: 1.1rem;
+    min-width: 180px; /* Reduzido de 200px para 180px */
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: white;
+    text-decoration: none;
+}
+
+.cta-button.secondary:hover {
+    background: rgba(148, 0, 211, 0.2);
+}
+
+
 

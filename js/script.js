@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.disconnect();
     });
 
-    VanillaTilt.init(document.querySelectorAll(".script-card"), {
+    VanillaTilt.init(document.querySelectorAll(".script-card, .hero-stats"), {
         max: 15,
         speed: 100,
         glare: false,
