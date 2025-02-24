@@ -1026,11 +1026,17 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .navbar {
+        display: flex;
         position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
-        z-index: 1000;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+        padding: 0.8rem 5%;
+        background: rgba(0, 0, 0, 0.85);
+    }
+
+    .navbar.visible {
+        transform: translateY(0);
     }
 
     .hero {
@@ -1079,10 +1085,6 @@ h1, h2, h3, h4, h5, h6 {
     html {
         height: -webkit-fill-available;
     }
-   
-    .navbar {
-        display: none; 
-    }
 
     .video-container iframe {
         width: 100%;
@@ -1097,7 +1099,10 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .nav-links {
-        gap: 1rem;
+        position: static;
+        transform: none;
+        justify-content: center;
+        flex: 1;
     }
 
     .script-content,
@@ -1108,6 +1113,10 @@ h1, h2, h3, h4, h5, h6 {
 
     .installation, .warning {
         grid-column: span 1;
+    }
+
+    .logo, .social-icons {
+        display: none;
     }
 
     .script-header {

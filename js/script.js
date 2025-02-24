@@ -262,4 +262,24 @@ document.addEventListener('DOMContentLoaded', function() {
         "max-glare": 0.5,
         gyroscope: true
     });
+
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.navbar');
+    const scrollThreshold = 100;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > scrollThreshold) {
+            if (scrollTop < lastScrollTop) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+        } else {
+            navbar.classList.remove('visible');
+        }
+
+        lastScrollTop = scrollTop;
+    });
 });
