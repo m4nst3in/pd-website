@@ -1115,10 +1115,6 @@ h1, h2, h3, h4, h5, h6 {
         grid-template-columns: 1fr;
     }
 
-    .video-container iframe {
-        height: 240px;
-    }
-
     .footer-content {
         padding-bottom: env(safe-area-inset-bottom);
     }
