@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add('selected');
 
             const scriptName = card.querySelector('.card-center h3').textContent.trim().toLowerCase();
-            const scriptURL = scriptLocations[scriptName] || 'khan.html';
+            const scriptURL = scriptLocations[scriptName] || 'pages/khan.html';
 
             window.location.href = scriptURL;
         });
