@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add('selected');
 
             const scriptName = card.querySelector('.card-center h3').textContent.trim().toLowerCase();
-            const scriptURL = scriptLocations[scriptName];
+            const scriptURL = scriptLocations[scriptName] || 'khan.html';
 
             window.location.href = scriptURL;
         });
