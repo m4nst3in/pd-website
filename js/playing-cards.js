@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cardsContainer && firstCard) {
         cardsContainer.scrollLeft = firstCard.offsetLeft;
+    }
 
     const scriptLocations = {
         'khan': 'pages/khan.html',
