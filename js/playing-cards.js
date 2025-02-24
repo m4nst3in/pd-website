@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.playing-card');
+    const cardsContainer = document.querySelector('.playing-cards-container');
+    const firstCard = document.querySelector('.playing-card:first-child');
+
+    if (cardsContainer && firstCard) {
+        cardsContainer.scrollLeft = firstCard.offsetLeft;
 
     const scriptLocations = {
         'khan': 'pages/khan.html',
