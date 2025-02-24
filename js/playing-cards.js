@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'speak': 'pages/speak.html',
         'tarefasp': 'pages/tarefasp.html',
         'kahoot': 'pages/kahoot.html',
-        'leiasp': 'pages/leiasp.html'
     };
 
     cards.forEach(card => {
