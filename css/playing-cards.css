@@ -184,19 +184,20 @@
         scroll-snap-type: x mandatory;
 
 
-    .playing-card {
-        margin: 0 5px;
-        min-width: 250px;
-        height: 350px;
-        scroll-snap-align: start;
-    }
+        .playing-card {
+            margin: 0 5px;
+            min-width: 250px;
+            height: 350px;
+            scroll-snap-align: start;
+        }
 
-    .playing-card:hover {
-        margin: 0 5px;
-    }
+        .playing-card:hover {
+            margin: 0 5px;
+        }
 
-    .card-main-image {
-        width: 100px;
-        height: 100px;
+        .card-main-image {
+            width: 100px;
+            height: 100px;
+        }
     }
 }
