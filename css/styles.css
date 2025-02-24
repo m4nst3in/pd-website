@@ -1115,6 +1115,22 @@ h1, h2, h3, h4, h5, h6 {
     .footer-content {
         padding-bottom: env(safe-area-inset-bottom);
     }
+    .video-container, .installation-content {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .installation-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .installation-text, .video-container {
+        width: 100%;
+        padding: 1rem;
+    }
 }
 
 .scroll-progress {
