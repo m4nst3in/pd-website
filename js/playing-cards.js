@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => {
         VanillaTilt.init(card, {
-            max: 15,
+            max: 25,
             speed: 300,
             glare: true,
-            "max-glare": 0.3,
+            gyroscope: true,
+            "max-glare": 0.2,
             scale: 1.05,
         });
 

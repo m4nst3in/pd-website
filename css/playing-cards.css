@@ -1,15 +1,14 @@
 .playing-cards-container {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
-    padding: 2rem;
-    overflow-x: auto;
-    min-height: 450px;
+    justify-content: center;
     align-items: center;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) rgba(138, 43, 226, 0.1);
-    -webkit-overflow-scrolling: touch;
-    margin: 0 2rem;
+    min-height: 450px;
+    padding: 2rem;
+    margin: 0 auto;
+    overflow-x: visible;
+    position: relative;
+    max-width: 100%;
 }
 
 .playing-cards-container::-webkit-scrollbar {
@@ -30,23 +29,29 @@
     position: relative;
     min-width: 280px;
     height: 400px;
-    background: rgba(138, 43, 226, 0.1);
+    background: rgba(13, 4, 22, 0.95);
     border-radius: 12px;
     transform-style: preserve-3d;
     cursor: pointer;
     box-shadow:
             0 0 20px rgba(138, 43, 226, 0.2),
             inset 0 0 15px rgba(138, 43, 226, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     backdrop-filter: blur(5px);
     border: 2px solid var(--primary-color);
+    margin: 0 -50px;
+    transform: scale(0.85);
+    z-index: 1;
 }
 
 .playing-card:hover {
-    transform: translateY(-10px);
+    background: rgba(20, 6, 34, 0.98);
+    transform: scale(1.1) !important;
+    z-index: 10;
+    margin: 0;
     box-shadow:
-            0 0 25px rgba(138, 43, 226, 0.3),
-            inset 0 0 20px rgba(138, 43, 226, 0.2);
+            0 0 30px rgba(138, 43, 226, 0.4),
+            inset 0 0 25px rgba(138, 43, 226, 0.3);
 }
 
 .card-inner {
@@ -126,25 +131,25 @@
 @keyframes dealCard {
     from {
         opacity: 0;
-        transform: translateX(100px);
+        transform: translateX(50px) scale(0.85);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) scale(0.85);
     }
 }
 
 .playing-card {
-    animation: dealCard 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) backwards;
+    transform: scale(0.85) !important;
 }
 
-.playing-card:nth-child(1) { animation-delay: 0.1s; }
-.playing-card:nth-child(2) { animation-delay: 0.2s; }
-.playing-card:nth-child(3) { animation-delay: 0.3s; }
-.playing-card:nth-child(4) { animation-delay: 0.4s; }
-.playing-card:nth-child(5) { animation-delay: 0.5s; }
-.playing-card:nth-child(6) { animation-delay: 0.6s; }
-.playing-card:nth-child(7) { animation-delay: 0.7s; }
+.playing-card:nth-child(1) { z-index: 1; }
+.playing-card:nth-child(2) { z-index: 2; }
+.playing-card:nth-child(3) { z-index: 3; }
+.playing-card:nth-child(4) { z-index: 4; }
+.playing-card:nth-child(5) { z-index: 5; }
+.playing-card:nth-child(6) { z-index: 6; }
+.playing-card:nth-child(7) { z-index: 7; }
 
 .playing-card::after {
     content: '';
@@ -173,11 +178,17 @@
     .playing-cards-container {
         padding: 1rem;
         margin: 0 1rem;
+        overflow-x: auto;
     }
 
     .playing-card {
+        margin: 0 10px;
         min-width: 250px;
         height: 350px;
+    }
+
+    .playing-card:hover {
+        margin: 0 10px;
     }
 
     .card-main-image {
