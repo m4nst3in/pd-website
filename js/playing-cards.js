@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'speak': 'pages/speak.html',
         'tarefasp': 'pages/tarefasp.html',
         'kahoot': 'pages/kahoot.html',
+        'youtube': 'pages/youtube.html',
+        'spotify': 'pages/spotify.html',
     };
 
     cards.forEach(card => {
