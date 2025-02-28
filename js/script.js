@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateUserCount() {
         const userCountElement = document.getElementById('user-count');
         const targetCount = 265700;
-        const duration = 2200; // duração da animação em milissegundos
+        const duration = 2200;
         const startTime = performance.now();
 
         function updateCount(currentTime) {

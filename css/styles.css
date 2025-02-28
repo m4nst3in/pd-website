@@ -4,7 +4,11 @@
     --font-primary: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
     --primary-color: #8A2BE2;
     --secondary-color: #4B0082;
-    --background-color: rgba(0, 0, 0, 0.85);
+    --background-color: #0a0a0a;
+    --pattern-size: 20px;
+    --pattern-spacing: 40px;
+    --pattern-color: #8A2BE2;
+    --pattern-opacity: 0.15;;
     --text-color: #ffffff;
     --card-background: rgba(26, 26, 26, 0.8);   
     --hover-color: #9400D3;
@@ -63,16 +67,47 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    z-index: -2;
+    background-color: #0a0a0a;
+    background-image:
+        /* Triangles */
+            linear-gradient(45deg, #8A2BE2 3px, transparent 3px),
+            linear-gradient(-45deg, #8A2BE2 3px, transparent 3px),
+                /* Squares */
+            linear-gradient(to right, transparent calc(var(--pattern-spacing) - 2px), #8A2BE2 calc(var(--pattern-spacing) - 2px), #8A2BE2 var(--pattern-spacing), transparent var(--pattern-spacing)),
+            linear-gradient(to bottom, transparent calc(var(--pattern-spacing) - 2px), #8A2BE2 calc(var(--pattern-spacing) - 2px), #8A2BE2 var(--pattern-spacing), transparent var(--pattern-spacing)),
+                /* Diamonds */
+            radial-gradient(circle at center, #8A2BE2 2px, transparent 2px);
+    background-size:
+            var(--pattern-spacing) var(--pattern-spacing),
+            var(--pattern-spacing) var(--pattern-spacing),
+            var(--pattern-spacing) var(--pattern-spacing),
+            var(--pattern-spacing) var(--pattern-spacing),
+            var(--pattern-spacing) var(--pattern-spacing);
+    background-position:
+            0 0,
+            calc(var(--pattern-size) / 2) calc(var(--pattern-size) / 2),
+            0 0,
+            0 0,
+            calc(var(--pattern-size) * 2) calc(var(--pattern-size) * 2);
+    opacity: var(--pattern-opacity);
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100vh;
     z-index: -1;
-    background-image: url('../assets/images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.97) 0%,
+            rgba(10, 10, 10, 0.95) 50%,
+            rgba(0, 0, 0, 0.97) 100%
+    );
 }
 
 .navbar {
@@ -86,7 +121,6 @@ body::before {
     top: 0;
     left: 0; 
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.5); 
     max-width: 100%; 
     margin: 0;
     transform: none;
