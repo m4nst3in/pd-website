@@ -151,6 +151,7 @@
 .playing-card:nth-child(6) { z-index: 6; }
 .playing-card:nth-child(7) { z-index: 7; }
 .playing-card:nth-child(8) { z-index: 8; }
+.playing-card:nth-child(9) { z-index: 9; }
 
 .playing-card::after {
     content: '';
