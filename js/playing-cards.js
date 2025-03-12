@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const scriptLocations = {
-        'khan': 'pages/khan.html',
+        'khanacademy': 'pages/khan.html',
         'alura': 'pages/alura.html',
         'matific': 'pages/matific.html',
         'speak': 'pages/speak.html',
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'kahoot': 'pages/kahoot.html',
         'youtube': 'pages/youtube.html',
         'spotify': 'pages/spotify.html',
+        'expansao n.': 'pages/expansao.html',
     };
 
     cards.forEach(card => {
